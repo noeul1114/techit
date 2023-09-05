@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
 from accountapp.forms import AccountUpdateForm
 from accountapp.models import Registration
@@ -62,5 +62,13 @@ class AccountUpdateView(UpdateView):
     def get_success_url(self):
         return reverse("accountapp:detail",
                        kwargs={"pk": self.kwargs["pk"]})
+
+
+class AccountDeleteView(DeleteView):
+    model = User
+    context_object_name = "target_user"
+    success_url = reverse_lazy('accountapp:hello_world')
+    template_name = "accountapp/delete.html"
+
 
 
