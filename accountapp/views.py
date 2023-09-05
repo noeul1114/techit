@@ -61,7 +61,6 @@ class AccountUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse("accountapp:detail",
-                       {"pk": self.kwargs["pk"]})
-
+                       kwargs={"pk": self.kwargs["pk"]})
 
 
