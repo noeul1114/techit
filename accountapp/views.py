@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, LogoutView
@@ -6,8 +7,10 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
+from accountapp.decorators import account_ownership_required
 from accountapp.forms import AccountUpdateForm
 from accountapp.models import Registration
 
@@ -53,6 +56,10 @@ class AccountDetailView(DetailView):
     context_object_name = "target_user"
 
 
+@method_decorator(login_required, 'get')
+@method_decorator(login_required, 'post')
+@method_decorator(account_ownership_required, 'get')
+@method_decorator(account_ownership_required, 'post')
 class AccountUpdateView(UpdateView):
     model = User
     form_class = AccountUpdateForm
@@ -64,6 +71,10 @@ class AccountUpdateView(UpdateView):
                        kwargs={"pk": self.kwargs["pk"]})
 
 
+@method_decorator(login_required, 'get')
+@method_decorator(login_required, 'post')
+@method_decorator(account_ownership_required, 'get')
+@method_decorator(account_ownership_required, 'post')
 class AccountDeleteView(DeleteView):
     model = User
     context_object_name = "target_user"
