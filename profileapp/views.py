@@ -22,6 +22,7 @@ class ProfileCreateView(CreateView):
                        kwargs={'pk': self.request.user.pk})
 
 
+
 class ProfileUpdateView(UpdateView):
     model = Profile
     form_class = ProfileForm
