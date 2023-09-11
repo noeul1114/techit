@@ -25,7 +25,6 @@
 <div class="my-5">
 
   <div class="container">
-
     {% for article in article_list %}
 
     <a href="{% url 'articleapp:detail' pk=article.pk %}">
@@ -35,9 +34,37 @@
     </a>
 
     {% endfor %}
-
-
   </div>
+
+  <div class="text-center my-5">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}"
+               class="btn btn-secondary rounded-pill">
+                {{ page_obj.previous_page_number }}
+            </a>
+        {% endif %}
+            <a href="#"
+               class="btn btn-dark rounded-pill">
+                {{ page_obj.number }}
+            </a>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"
+               class="btn btn-secondary rounded-pill">
+                {{ page_obj.next_page_number }}
+            </a>
+        {% endif %}
+    </div>
+
+
+    <div class="my-5 text-center">
+
+        <a href="{% url 'articleapp:create' %}"
+           class="btn btn-dark rounded-pill px-5">
+            Write
+        </a>
+
+    </div>
+
 
 </div>
 
