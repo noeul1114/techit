@@ -27,6 +27,7 @@
     </div>
 
     <div class="my-5">
+        {% if target_article.writer %}
         <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}">
             <img style="width: 2.5rem; height: 2.5rem; object-fit: cover;
                         border-radius: 50%;"
@@ -35,6 +36,12 @@
                 {{ target_article.writer.profile.nickname }}
             </span>
         </a>
+        {% else %}
+        <h6>
+            Unknown
+        </h6>
+        {% endif %}
+
     </div>
 
     <hr class="my-5">
