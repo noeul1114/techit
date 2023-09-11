@@ -17,7 +17,13 @@
     </div>
 
     <div>
-        Likes : {{ target_article.like }}
+        <span style="color: #f77"
+                class="material-symbols-outlined">
+            favorite
+        </span>
+        <span style="vertical-align: top;">
+            {{ target_article.like }}
+        </span>
     </div>
 
     <div class="my-5">
@@ -40,8 +46,8 @@
                     src="{{ target_article.image.url }}" alt="">
         </div>
 
-        <div>
-            {{ target_article.content }}
+        <div class="my-5 text-start">
+            {{ target_article.content|linebreaks }}
         </div>
 
         {% if user == target_article.writer %}
