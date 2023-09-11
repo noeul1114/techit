@@ -4,7 +4,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import TemplateView, CreateView, DetailView, UpdateView
+from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView
 
 from articleapp.decorators import article_ownership_required
 from articleapp.forms import ArticleForm
@@ -50,6 +50,15 @@ class ArticleUpdateView(UpdateView):
                        kwargs={'pk': self.object.pk})
 
 
+@method_decorator(article_ownership_required, 'get')
+@method_decorator(article_ownership_required, 'post')
+class ArticleDeleteView(DeleteView):
+    model = Article
+    context_object_name = 'target_article'
+    template_name = 'articleapp/delete.html'
+
+    def get_success_url(self):
+        return reverse('accountapp:hello_world')
 
 
 
