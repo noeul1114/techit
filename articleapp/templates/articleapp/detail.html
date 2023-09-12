@@ -79,6 +79,33 @@
             {% include 'commentapp/create.html' %}
         </div>
 
+        <div>
+
+            {% for comment in target_article.comments.all %}
+            <div style="border: solid #ccc; border-radius: 2rem;"
+                    class="my-2 p-3 text-start">
+                
+                <div>
+                    <img style="width: 2.5rem; height: 2.5rem;
+                                border-radius: 50%; object-fit: cover;"
+                            src="{{ comment.writer.profile.image.url }}" alt="">
+                    <span class="mx-2">
+                        {{ comment.writer.profile.nickname }}
+                    </span>
+                    <span class="ms-5">
+                        {{ comment.created_at }}
+                    </span>
+                </div>
+
+                <div class="my-3">
+                    {{ comment.content|linebreaks }}
+                </div>
+                
+            </div>
+            {% endfor %}
+
+        </div>
+
     </div>
 
 </div>

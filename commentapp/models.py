@@ -6,8 +6,10 @@ from articleapp.models import Article
 
 
 class Comment(models.Model):
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, null=False)
-    writer = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, null=False,
+                                related_name='comments')
+    writer = models.ForeignKey(User, on_delete=models.CASCADE, null=False,
+                               related_name='comments')
 
     content = models.TextField(null=False)
 
