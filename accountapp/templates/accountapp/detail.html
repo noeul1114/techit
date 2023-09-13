@@ -55,18 +55,12 @@
         </div>
         {% endif %}
     </div>
-
-
-    <div>
-        <a href="{% url 'articleapp:create' %}"
-           class="btn btn-primary rounded-pill px-5 my-5">
-            Article create
-        </a>
-    </div>
-
-
+    
 
 </div>
+
+
+{% include 'list_fragment.html' with article_list=object_list %}
 
 
 {% endblock %}

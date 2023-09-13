@@ -9,10 +9,12 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic.list import MultipleObjectMixin
 
 from accountapp.decorators import account_ownership_required
 from accountapp.forms import AccountUpdateForm
 from accountapp.models import Registration
+from articleapp.models import Article
 
 
 def hello_world(request):
@@ -50,10 +52,17 @@ class AccountLogoutView(LogoutView):
     pass
 
 
-class AccountDetailView(DetailView):
+class AccountDetailView(DetailView, MultipleObjectMixin):
     model = User
     template_name = "accountapp/detail.html"
     context_object_name = "target_user"
+    paginate_by = 20
+
+    def get_context_data(self, **kwargs):
+        object_list = Article.objects.filter(writer=self.object)
+
+        return super().get_context_data(object_list=object_list,
+                                        **kwargs)
 
 
 @method_decorator(login_required, 'get')
