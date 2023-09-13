@@ -62,7 +62,11 @@ class AccountDetailView(DetailView, MultipleObjectMixin):
     def get_context_data(self, **kwargs):
         object_list = Article.objects.filter(writer=self.object)
 
+        subscribed = Subscription.objects.filter(user=self.request.user,
+                                                 target_user=self.object)
+
         return super().get_context_data(object_list=object_list,
+                                        subscribed=subscribed,
                                         **kwargs)
 
 
