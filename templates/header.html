@@ -13,8 +13,11 @@
                 Home
             </a>
         </span>
-        <span>nav2</span>
-        <span>nav3</span>
+        <span>
+            <a href="{% url 'subscribeapp:list' %}">
+                Subscription
+            </a>
+        </span>
         {% if user.is_authenticated %}
         <span>
             <a href="{% url 'accountapp:detail' pk=user.pk %}">
