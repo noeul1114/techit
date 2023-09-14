@@ -6,7 +6,7 @@ RUN git clone https://github.com/noeul1114/techit.git
 
 WORKDIR /home/techit/
 
-RUN pip install django django-boostrap4 pillow
+RUN pip install django django-bootstrap4 pillow
 
 EXPOSE 8000
 
