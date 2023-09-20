@@ -17,8 +17,8 @@ services:
     networks:
       - nginx_django
     volumes:
-      - media_volume:/data/media/
-      - static_volume:/data/static/
+      - media_volume:/home/techit/media/
+      - static_volume:/home/techit/staticfiles/
 
   mariadb:
     image: mariadb:11.0
